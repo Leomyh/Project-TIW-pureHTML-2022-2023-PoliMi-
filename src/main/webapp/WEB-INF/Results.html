@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>OneHundredShop</title>
+<link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<!--Bar Menu-->
+<body>
+
+	<div class="bar">
+		<label class="title_label">- - -Results - - -</label>
+		<div class="bar_pos">
+			<a th:href="@{/GoToHomePage}">HOME</a> <a th:href="@{/GoToOrder}">ORDERS</a>
+			<a th:href="@{/GoToCart}">CART</a>
+		</div>
+
+		<div class="user_menu">
+			<button class="user">
+				<p id="UserTag">
+					<span th:text="${user.name}"></span>
+			</button>
+			<div class="menu_select">
+				<a id="BackLogin" th:href="@{Logout}">Logout</a>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!--Page Results-->
+
+	<section class="results_section">
+		<h2>
+			Search results for "<span th:text="${keyword}"></span>"    <span class="error" th:text="${clickError}"></span>
+		</h2>
+		<table class="product_table">
+			<thead>
+				<tr>
+					<th>Code</th>
+					<th>Product Name</th>
+					<th>Price</th>
+					<th>Picture</th>
+					<th>Action</th>
+					<th>More Supplier</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product: ${products}">
+					<td style="width: 80px;"><span th:text="${product.code}"></span></td>
+					<td><span th:text="${product.name}"></span></td>
+					<td>&euro; <span
+						th:text="${#numbers.formatDecimal(product.minPrice, 1, 2)}"></span></td>
+					<td class="image_td"><img th:src="${product.photo}"
+						style="max-width: 160px; max-height: 160px;"></td>
+					<td>
+						<form th:action="@{/ClickProduct}" method="POST">
+							<input type="hidden" name="product_code"
+								th:value="${product.code}">
+							<button class="show_more" type="submit">Show More</button>
+						</form>
+					</td>
+
+					<!-- Fragment -->
+
+					<td>
+						<div class="scrollable-content">
+							<div th:if="${product.isSelected}">
+								<span
+									th:insert="@{WEB-INF/SupplierFragment.html} :: fragment(${product})"></span>
+							</div>
+						</div>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+
+	</section>
+
+
+	<!--Page End-->
+
+	<footer>
+		<p>&copy; 100-Shop</p>
+	</footer>
+
+</body>
+</html>

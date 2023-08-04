@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Registration-Account</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link href="css/FormStyle.css" rel="stylesheet" type="text/css"
+	media="all" />
+</head>
+<body>
+	<!-- partial:index.partial.html -->
+	<div class="wrapper">
+		<div class="form">
+			<div class="form_inner">
+
+				<fieldset>
+					<form action="GoToRegistration" method="POST">
+						<label class="input_label" th:class="error" th:text="${errorReg}"></label>
+
+						<div class="div_input_cell">
+							<label class="input_label">Email</label> <input type="email"
+								name="email_reg" placeholder="E-mail" class="input_cell"
+								required> <span th:class="error"
+								th:if="${errorMap['email_reg']}"
+								th:text="${errorMap['email_reg']}"></span>
+						</div>
+
+						<div class="div_input_cell">
+							<label class="input_label">Name</label> <input type="text"
+								name="name_reg" placeholder="Name" class="input_cell" required>
+							<span th:class="error" th:if="${errorMap['name_reg']}"
+								th:text="${errorMap['name_reg']}"></span>
+						</div>
+
+						<div class="div_input_cell">
+							<label class="input_label">Surname</label> <input type="text"
+								name="surname_reg" placeholder="Surname" class="input_cell"
+								required> <span th:class="error"
+								th:if="${errorMap['surname_reg']}"
+								th:text="${errorMap['surname_reg']}"></span>
+						</div>
+
+
+						<div class="div_input_cell">
+							<label class="input_label">Password</label> <input
+								type="password" name="password_reg" placeholder="Password"
+								class="input_cell" required> <span th:class="error"
+								th:if="${errorMap['password_reg']}"
+								th:text="${errorMap['password_reg']}"></span>
+
+						</div>
+
+						<div class="div_input_cell">
+							<label class="input_label">Confirm password</label> <input
+								type="password" name="password_conf_reg"
+								placeholder="Confirm password" class="input_cell" maxlength="45"
+								required> <span th:class="error"
+								th:if="${errorMap['password_conf_reg']}"
+								th:text="${errorMap['password_conf_reg']}"></span>
+
+						</div>
+
+						<div class="div_input_cell">
+							<label class="input_label">Address</label> <input type="text"
+								name="address_reg" placeholder="Address" class="input_cell"
+								required> <span th:class="error"
+								th:if="${errorMap['address_reg']}"
+								th:text="${errorMap['address_reg']}"></span>
+
+						</div>
+
+						<div class="div_input_cell">
+							<label class="input_label">Card Number</label> <input type="text"
+								name="card_number_reg" placeholder="Card Number"
+								class="input_cell" maxlength="16" required> <span
+								th:class="error" th:if="${errorMap['card_number_reg']}"
+								th:text="${errorMap['card_number_reg']}"></span>
+
+						</div>
+
+						<div class="form_row">
+							<div class="form_col">
+								<div class="form_group">
+									<label class="input_label">Expiration Date</label> <select
+										class="input_cell -select" name="month_reg" required>
+
+										<option value="Month" disabled selected>Month</option>
+										<option value="01">Jan</option>
+										<option value="02">Feb</option>
+										<option value="03">Mar</option>
+										<option value="04">Apr</option>
+										<option value="05">May</option>
+										<option value="06">Jun</option>
+										<option value="07">Jul</option>
+										<option value="08">Aug</option>
+										<option value="09">Sep</option>
+										<option value="10">Oct</option>
+										<option value="11">Nov</option>
+										<option value="12">Dec</option>
+									</select> <select class="input_cell -select" name="year_reg" required>
+										<option value="Year" disabled selected>Year</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+										<option value="2025">2025</option>
+										<option value="2026">2026</option>
+										<option value="2027">2027</option>
+										<option value="2028">2028</option>
+										<option value="2029">2029</option>
+										<option value="2030">2030</option>
+									</select> <span th:class="error" th:if="${errorMap['month_reg']}"
+										th:text="${errorMap['month_reg']}"></span>
+
+								</div>
+							</div>
+
+							<div class="imput-cell__col -cvv">
+								<div class="div_input_cell">
+									<label class="input_label">CVV</label> <input type="text"
+										name="card_cvv_reg" placeholder="CVV" class="input_cell"
+										maxlength="3" required> <span th:class="error"
+										th:if="${errorMap['card_cvv_reg']}"
+										th:text="${errorMap['card_cvv_regg']}"></span>
+
+								</div>
+							</div>
+
+						</div>
+						<button class="form_button">Submit</button>
+					</form>
+				</fieldset>
+
+			</div>
+		</div>
+
+		<a href="Index.html" class="back_button">Back to Login </a>
+	</div>
+	<!-- partial -->
+
+</body>
+</html>

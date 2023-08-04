@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>OneHundredShop</title>
+<link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<!--Bar Menu-->
+<body>
+
+	<div class="bar">
+		<label class="title_label">- - - Cart - - -</label>
+		<div class="bar_pos">
+			<a th:href="@{/GoToHomePage}">HOME</a> <a th:href="@{/GoToOrder}">ORDERS</a>
+			<a th:href="@{/GoToCart}">CART</a>
+		</div>
+
+		<div class="user_menu">
+			<button class="user">
+				<p id="UserTag">
+					<span th:text="${user.name}"></span>
+				<p>
+			</button>
+			<div class="menu_select">
+				<a id="BackLogin" th:href="@{Logout}">Logout</a>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!--Page Cart-->
+	<div class="cart_list">
+
+		<div class="cart_tab" th:each="supplier : ${cart_list}">
+			<h2>
+				<span th:text="${supplier.preOrder_ref.supplier.name}"></span>
+			</h2>
+			<table class="myCart_table">
+				<tr>
+					<th>Product Name</th>
+					<th>Quantity</th>
+					<th>Price</th>
+				</tr>
+
+				<tbody>
+					<tr th:each="entry : ${supplier.preOrder_ref.preOrderMap}">
+						<td><span th:text="${entry.value.product.name}"></span></td>
+						<td><span th:text="${entry.value.quantity}"></span></td>
+						<td><span
+							th:text="${#numbers.formatDecimal(entry.value.price, 1, 2)}"></span>
+							&euro;</td>
+
+					</tr>
+					<tr>
+						<th>Shipping Fee</th>
+						<th>-</th>
+						<th><span th:text="${supplier.preOrder_ref.shippingCost}"></span></th>
+					</tr>
+					<tr>
+						<th>Total</th>
+						<th><span th:text="${supplier.preOrder_ref.totalQuantity}"></span></th>
+						<th><span
+							th:text="${#numbers.formatDecimal(supplier.preOrder_ref.totalCost, 1, 2)}">
+						</span> &euro;</th>
+
+					</tr>
+
+
+				</tbody>
+
+			</table>
+			<form action="PlaceOrder" method="POST">
+				<input type="hidden" name="order" th:value="${supplier.code}">
+				<button class="cart_checkout">PLACE ORDER</button>
+			</form>
+		</div>
+
+	</div>
+
+	<!--Page End-->
+	<br>
+	<h2 th:text="${cart_list.size()==0? 'Cart Empty' : ''}"
+		style="color: gray; text-align: center;"></h2>
+	<footer>
+
+		<p>
+			<br>
+			<br>&copy; 100-Shop
+		</p>
+	</footer>
+
+</body>
+</html>

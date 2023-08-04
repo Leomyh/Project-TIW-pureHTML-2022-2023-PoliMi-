@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>OneHundredShop</title>
+<link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<!--Bar Menu-->
+<body>
+
+	<div class="bar">
+		<label class="title_label">- - - Orders - - -</label>
+		<div class="bar_pos">
+			<a th:href="@{/GoToHomePage}">HOME</a> <a th:href="@{/GoToOrder}">ORDERS</a>
+			<a th:href="@{/GoToCart}">CART</a>
+		</div>
+
+		<div class="user_menu">
+			<button class="user">
+				<span th:text="${user.name}"></span>
+			</button>
+			<div class="menu_select">
+				<a id="BackLogin" th:href="@{Logout}">Logout</a>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!--Page Orders-->
+
+	<section class="results_section" th:if="${orders.size()>0}">
+		<h2>History</h2>
+		<table class="myOrder_table" >
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Code</th>
+					<th>Supplier</th>
+					<th>Product</th>
+					<th>Total Payment</th>
+					<th>Address of shipping</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="order : ${orders}">
+					<td><span th:text="${order.shippingDate}"></span></td>
+					<td><span th:text="${order.code}"></span></td>
+					<td><span th:text="${order.supplierCode}"></span></td>
+					<td>
+						<table class="myOrder_table">
+							<tr th:each="productName : ${order.productNameList}">
+								<td th:text="${productName}"></td>
+							</tr>
+						</table>
+					</td>
+					<td><span
+						th:text="${#numbers.formatDecimal(order.totalValue, 1, 2)}"></span>
+						&euro;</td>
+					<td><span th:text="${order.userAddress}"></span></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</section>
+
+	<!--Page End-->
+	<br>
+	<h2 th:text="${orders.size()==0? 'No Orders Yet' : ''}"
+		style="color: gray; text-align: center;"></h2>
+	<br>
+	<footer>
+		<p>&copy; 100-Shop</p>
+	</footer>
+
+</body>
+</html>

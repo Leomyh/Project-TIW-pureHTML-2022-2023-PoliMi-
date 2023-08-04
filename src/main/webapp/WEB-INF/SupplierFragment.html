@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>OneHundredShop</title>
+<link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<!--Page ProductDetails-->
+<table th:fragment="fragment(product)">
+	<tr>
+		<td th:each="supplierOffer : ${product.offerList}">
+
+			<div class="supplier_card">
+				<div class="product_info">
+					<h2>
+						<span th:text="${supplierOffer.supplier.name}"></span>
+					</h2>
+
+					<p>
+						_Rating:<span th:text="${supplierOffer.supplier.rating}"></span>_
+					</p>
+
+					<ul>
+						<li th:each="range : ${supplierOffer.supplier.ranges}">Qty:
+							from <span th:text="${range.minQty}"></span> to <span
+							th:text="${range.maxQty}"></span>
+							<p>
+								<small> Price:<span th:text="${range.price}"></span></small>
+							</p>
+
+						</li>
+					</ul>
+
+					<ul>
+						<li>Free shipping Threshold:</li>
+						<p>
+							<small> <span
+								th:text="${supplierOffer.supplier.freeShipping != 0 ? supplierOffer.supplier.freeShipping : 'ND'}"></span>
+							</small>
+						</p>
+					</ul>
+
+				</div>
+				<form action="PutInCart" method="POST">
+					<div class="div_product">
+						<h3>Price</h3>
+						<h2>
+							<span th:text="${supplierOffer.offer.price}"></span> &euro;
+						</h2>
+
+						<div>
+							<div class="product_input">
+								<input type="number" min="1" max="999" step="1" name="quantity"
+									value="" placeholder="Quantity" required>
+							</div>
+						</div>
+					</div>
+
+					<div class="div_product">
+
+						<div class="product_add">
+
+							<input type="hidden" name="pickproduct_code"
+								th:value="${product.code}"> <input type="hidden"
+								name="ref_supplier_code"
+								th:value="${supplierOffer.supplier.code}">
+							
+							<button type="submit">Put in Cart</button>
+							
+
+
+						</div>
+						<p><small th:class="error" th:text="${quantityErr}"></small>
+						</p>
+						<p>
+							
+							<small> Total qty:<span
+								th:text="${supplierOffer.supplier.preOrder_ref != null ? supplierOffer.supplier.preOrder_ref.totalQuantity : '0'}"></span></small>
+						</p>
+						<p>
+							<small> Total price:<span
+								th:text="${supplierOffer.supplier.preOrder_ref != null ? supplierOffer.supplier.preOrder_ref.totalCost : '0'}"></span></small>
+						</p>
+
+					</div>
+				</form>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<!--Page End-->
+</body>
+</html>

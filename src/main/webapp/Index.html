@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>One Hundred Shop</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/FormStyle.css" />
+</head>
+
+<body>
+
+	<div class="wrapper">
+
+		<div class="form">
+			<div class="form_inner">
+				<fieldset>
+					<form action="CheckLogin" method="POST">
+						<label class="title_label">One Hundred Shop</label> <label
+							class="input_label" th:class="error" th:text="${errorAuth}"></label>
+						<div class="div_input_cell">
+							<label class="input_label">Email</label> <input
+								class="input_cell" type="email" name="email"
+								placeholder="Enter your email" required>
+						</div>
+						<div class="div_input_cell">
+							<label class="input_label">Password</label> <input
+								class="input_cell" type="password" name="password"
+								placeholder="Enter your password" required>
+						</div>
+						<button class="form_button" type="submit">Login</button>
+						<label class="input_label" style="margin-top: 20px">Don't
+							have an account?<a href="RegAccount.html">Register new
+								account</a>
+						</label>
+					</form>
+				</fieldset>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

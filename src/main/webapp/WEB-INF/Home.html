@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>OneHundredShop</title>
+<link href="css/HomeStyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<!--Bar Menu-->
+<body>
+
+	<div class="bar">
+		<label class="title_label">- - - One Hundred Shop - - -</label>
+		<div class="bar_pos">
+			<a th:href="@{/GoToHomePage}">HOME</a> <a th:href="@{/GoToOrder}">ORDERS</a>
+			<a th:href="@{/GoToCart}">CART</a>
+
+		</div>
+
+		<div class="user_menu">
+
+			<button class="user">
+				<p id="UserTag">
+					<span th:text="${user.name}"></span>
+				<p>
+			</button>
+			<div class="menu_select">
+				<a id="BackLogin" th:href="@{Logout}">Logout</a>
+			</div>
+		</div>
+
+	</div>
+
+	<!--Home Page-->
+	<form class="bar_search" action="GetProducts" method="POST">
+
+		<input class="input_search" type="text" name="search"
+			placeholder="Search Product">
+		<button class="button_search" type="submit">search</button>
+		<span th:class="error" th:text="${errorSearch}"></span>
+	</form>
+
+	<div class="main_page">
+
+
+		<section class="image_section">
+			<div class="image_container">
+				<div th:each="product : ${last_seen}">
+					<div class="product_item">
+						<img th:src="${product.photo}"
+							style="max-width: 180px; max-height: 180px;">
+						<p>
+							<small th:text="${product.name}"></small>
+						</p>
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+		</section>
+
+	</div>
+
+	<!--Page End-->
+
+	<footer>
+		<p>&copy; 100-Shop</p>
+	</footer>
+
+</body>
+</html>
